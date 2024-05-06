@@ -3,6 +3,7 @@ from.serializers import EmployeeSerializer
 from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework import status
+from core.utils import response_body
 
 class ImportData(CreateAPIView):
 
@@ -22,10 +23,13 @@ class ImportData(CreateAPIView):
             serializer = EmployeeSerializer(data=data_dict, many=True)
             if serializer.is_valid():
                 serializer.save()
-                return Response("Data Imported Successfully!", status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(response_body(status.HTTP_200_OK, message="Data Imported Successfully!"))
+            else:
+                return Response(response_body(status.HTTP_400_BAD_REQUEST, errors=serializer.errors))
+        
         except Exception as err:
-            return Response(str(err), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            # Handle any exceptions and return an appropriate error response
+            return Response(response_body(status.HTTP_500_INTERNAL_SERVER_ERROR, errors=str(err)))
 
 
 
