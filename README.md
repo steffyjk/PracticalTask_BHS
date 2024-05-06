@@ -39,4 +39,6 @@ To run the Project
 (env)$ python manage.py migrate
 (env)$ python manage.py runserver
 ```
-And navigate to `http://127.0.0.1:8000/`.
+And hit this api first to Import data to `http://127.0.0.1:8000/import-data/`.
+
+Then navigate to `http://127.0.0.1:8000/`.
