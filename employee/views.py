@@ -1,9 +1,11 @@
 import pandas as pd
 from.serializers import EmployeeSerializer
 from rest_framework.generics import CreateAPIView, RetrieveAPIView
+from django.views.generic import ListView
 from rest_framework.response import Response
 from rest_framework import status
 from core.utils import response_body
+from .models import Employee
 
 class ImportData(CreateAPIView):
 
@@ -32,5 +34,8 @@ class ImportData(CreateAPIView):
             return Response(response_body(status.HTTP_500_INTERNAL_SERVER_ERROR, errors=str(err)))
 
 
-
+class EmployeeListView(ListView):
+    model = Employee
+    template_name = 'employee_list.html'  
+    context_object_name = 'employees'
 
