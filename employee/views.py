@@ -1,6 +1,6 @@
 import pandas as pd
 from.serializers import EmployeeSerializer
-from rest_framework.generics import CreateAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView
 from django.views.generic import ListView
 from rest_framework.response import Response
 from rest_framework import status
@@ -8,9 +8,25 @@ from core.utils import response_body
 from .models import Employee
 
 class ImportData(CreateAPIView):
+    """
+    API endpoint to import data from an Excel file into the Employee model.
+
+    Methods:
+    - post(self, request, *args, **kwargs): Handles the POST request to import data.
+    """
 
     def post(self, request, *args, **kwargs):
+        """
+        Handles the POST request to import data from an Excel file.
 
+        Args:
+        - request: HTTP request object.
+        - args: Additional positional arguments.
+        - kwargs: Additional keyword arguments.
+
+        Returns:
+        - Response: HTTP response with import status.
+        """
         try:  
             df = pd.read_excel('source\Practical Task Python sheet (4).xlsx', engine='openpyxl')
 
@@ -35,7 +51,15 @@ class ImportData(CreateAPIView):
 
 
 class EmployeeListView(ListView):
+    """
+    View to display a list of employees.
+
+    Attributes:
+    - model: Specifies the model to be used for the ListView.
+    - template_name: Specifies the template file used to render the view.
+    - context_object_name: Specifies the name of the variable containing the list of employees in the template context.
+    """
+
     model = Employee
     template_name = 'employee_list.html'  
     context_object_name = 'employees'
-

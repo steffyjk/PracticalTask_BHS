@@ -2,10 +2,18 @@ from django.db import models
 import uuid
 
 class Company(models.Model):
+    """
+        Company Model
+        Id: UUID
+        Name: String
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
 
 class Employee(models.Model):
+    """
+        Employee Model
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     employee_id = models.IntegerField(null=True)
     first_name = models.CharField(max_length=255)

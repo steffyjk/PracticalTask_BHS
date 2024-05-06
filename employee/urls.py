@@ -1,8 +1,11 @@
 from django.urls import path
 from .views import ImportData, EmployeeListView
 
-# Various url patterns for calling APIs
+
 urlpatterns = [
+    # URL pattern for importing data
     path('import-data/', ImportData.as_view(), name='import-data'),
-    path('employees/', EmployeeListView.as_view(), name='employee_list'),
-]  
+
+    # URL pattern for displaying a list of employees
+    path('', EmployeeListView.as_view(), name='employee_list'),
+]
