@@ -15,3 +15,7 @@ class Employee(models.Model):
     manager_id = models.IntegerField()
     department_id = models.IntegerField()
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
+
+    class Meta:
+        # [ Constain ] --> First name , Last name and company should be unique together
+        unique_together = ['first_name', 'last_name', 'company']
